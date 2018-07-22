@@ -6,14 +6,13 @@ import totalExpenses from '../selectors/expenses-total';
 
 const ExpenseSummary = (props) =>(    
     <div>    
-      Viewing {props.expenses_count} expenses totalling {numeral(props.total_expenses_amount).format('$0,0.00')}
+      Viewing {props.expenses.length} expenses totalling {numeral(totalExpenses(props.expenses)/1000).format('$0.00')}
     </div>
 );
 
 const mapStateToProps = (state)=>{
     return {
-       expenses_count: selectExpenses(state.expenses,state.filters).length,        
-       total_expenses_amount: totalExpenses(state.expenses)        
+       expenses : selectExpenses(state.expenses,state.filters)        
     };
 }
 

@@ -13,7 +13,8 @@ const store = configureStore();
 
  const expenseOne = store.dispatch(addExpense({ description: 'Water Bill', amount: 1000}));
  const expenseTwo = store.dispatch(addExpense({ description: 'Gas Bill',createdAt : 2000}));
- const expenseThree = store.dispatch(addExpense({ description: 'Rent Bill', amount: 1000.50}));
+ const expenseThree = store.dispatch(addExpense({ description: 'Rent Bill', amount: 1000.25}));
+ const expenseFour = store.dispatch(addExpense({ description: 'Rent Bill', amount: 2000.25}));
 
 //store.dispatch(setTextFilter('Water'));
 // setTimeout(()=>{
