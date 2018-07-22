@@ -11,9 +11,9 @@ import AppRouter from './routers/AppRouter';
 
 const store = configureStore();
 
-// const expenseOne = store.dispatch(addExpense({ description: 'Water Bill', amount: 2100}));
-// const expenseTwo = store.dispatch(addExpense({ description: 'Gas Bill',createdAt : 1000}));
-// const expenseThree = store.dispatch(addExpense({ description: 'Rent Bill', amount: 109500}));
+ const expenseOne = store.dispatch(addExpense({ description: 'Water Bill', amount: 1000}));
+ const expenseTwo = store.dispatch(addExpense({ description: 'Gas Bill',createdAt : 2000}));
+ const expenseThree = store.dispatch(addExpense({ description: 'Rent Bill', amount: 1000.50}));
 
 //store.dispatch(setTextFilter('Water'));
 // setTimeout(()=>{
