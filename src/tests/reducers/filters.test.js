@@ -20,7 +20,7 @@ test('should set sort by to date',()=>{
     const currentState = {
         text: '',
         sortBy: 'amount',
-        startDate: undefined,
+        startDate: undefined, 
         endDate: undefined
     };
     const state  = filtersReducer(currentState, { type:'SORT_BY_DATE' });
