@@ -1,0 +1,6 @@
+{
+    "setuppFiles":[
+        "raf/pollyfill",
+        "<rootDir>/src/tests/setupTests.js"
+    ]
+}
