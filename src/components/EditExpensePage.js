@@ -7,11 +7,11 @@ export class EditExpensePage extends React.Component {
     onSubmit = (expense)=> {
         this.props.editExpense(this.props.expense.id,expense);
         this.props.history.push('/');
-    }
+    };
     onClick =()=>{
         this.props.removeExpense({id: this.props.expense.id});
         this.props.history.push('/');
-    }
+    };
     render(){
         return (
             <div>
@@ -24,7 +24,7 @@ export class EditExpensePage extends React.Component {
             </div>
         )
     }
-}    
+};   
 
 // const EditExpensePage = (props) => {
 //     console.log(props);
