@@ -1,6 +1,6 @@
 import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
-import { startAddExpense, addExpense, editExpense, removeExpense } from '../../actions/expenses';
+import { startAddExpense, addExpense, editExpense, removeExpense,setExpenses } from '../../actions/expenses';
 import expenses from '../fixtures/expenses';
 import database from '../../firebase/firebase';
 
@@ -8,6 +8,13 @@ let originalTimeout;
 beforeEach(()=>{
   originalTimeout = jasmine.DEFAULT_TIMEOUT_INTERVAL;
   jasmine.DEFAULT_TIMEOUT_INTERVAL = 25000;
+
+  const expensesData = {};
+  expenses.forEach(({ id,description,note,amount,createdAt })=>{
+      expensesData[id]={ description,note,amount,createdAt };
+  });
+  database.ref('expenses').set(expensesData);
+
 });
 
 afterEach(() => {
@@ -95,6 +102,16 @@ test('should add expense with defaults to database and store', (done) => {
     done();
   });
 });
+
+
+test('should set up expense action object with data', () => {
+    const action = setExpenses(expenses);
+    expect(action).toEqual({
+      type: 'SET_EXPENSES',
+      expenses: expenses
+    });
+});
+
 
 // test('should add expense to database and store', (done) => {
 //   const store = createMockStore({});
