@@ -10,17 +10,19 @@ import * as firebase from 'firebase';
   messagingSenderId: "853756560245"
 };
 firebase.initializeApp(config);
+
 const database = firebase.database();
 
+export { firebase, database as default };  
 
-database.ref('expenses').on('child_removed',(snapshot)=>{
-    console.log(snapshot.key,snapshot.val());
-});
+// database.ref('expenses').on('child_removed',(snapshot)=>{
+//     console.log(snapshot.key,snapshot.val());
+// });
 
-database.ref('expenses').on('child_changed',(snapshot)=>{
-  console.log('child_changed');
-  console.log(snapshot.key,snapshot.val());
-});
+// database.ref('expenses').on('child_changed',(snapshot)=>{
+//   console.log('child_changed');
+//   console.log(snapshot.key,snapshot.val());
+// });
 
 // database.ref('expenses').on('value',(snapshot)=>{
 //     const expenses=[];
@@ -33,7 +35,6 @@ database.ref('expenses').on('child_changed',(snapshot)=>{
 //     });
 //     console.log(expenses);
 // })
-
 
 // database.ref('expenses').push({
 //     description:'Rent',
@@ -96,13 +97,9 @@ database.ref('expenses').on('child_changed',(snapshot)=>{
 //     database.ref().off();
 // }, 10000);
 
-
-
 // setTimeout(() => {
 //   database.ref('age').set(30);  
 // }, 15500);
-
-
 
 // firebase.database().ref().set({
 //   name: 'Vibs C',
