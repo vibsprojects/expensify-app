@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import 'normalize.css/normalize.css';
 import { Provider } from 'react-redux';
 import configureStore from './store/ConfigureStore';
-import { addExpense } from './actions/expenses';
+import { startSetExpenses } from './actions/expenses';
 import { setTextFilter } from './actions/filters';
 import  getVisibleExpenses from './selectors/expenses';
 import './styles/styles.scss';
@@ -14,10 +14,10 @@ import './firebase/firebase';
 
 const store = configureStore();
 
- const expenseOne = store.dispatch(addExpense({ description: 'Water Bill', amount: 1000}));
- const expenseTwo = store.dispatch(addExpense({ description: 'Gas Bill',createdAt : 2000}));
- const expenseThree = store.dispatch(addExpense({ description: 'Rent Bill', amount: 1000.25}));
- const expenseFour = store.dispatch(addExpense({ description: 'Rent Bill', amount: 2000.25}));
+//  const expenseOne = store.dispatch(addExpense({ description: 'Water Bill', amount: 1000}));
+//  const expenseTwo = store.dispatch(addExpense({ description: 'Gas Bill',createdAt : 2000}));
+//  const expenseThree = store.dispatch(addExpense({ description: 'Rent Bill', amount: 1000.25}));
+//  const expenseFour = store.dispatch(addExpense({ description: 'Rent Bill', amount: 2000.25}));
 
 //store.dispatch(setTextFilter('Water'));
 // setTimeout(()=>{
@@ -29,7 +29,7 @@ const store = configureStore();
 // const visibleExpenses=getVisibleExpenses(state.expenses,state.filters);
 // console.log(visibleExpenses);
 
-console.log('test');
+//console.log('test');
 
 const jsx=(
     <Provider store={store}>
@@ -37,5 +37,9 @@ const jsx=(
     </Provider>
 );
 
-ReactDOM.render(jsx,document.getElementById('app'));
+ReactDOM.render(<p>Loading...</p>,document.getElementById('app'));
+
+store.dispatch(startSetExpenses()).then(()=>{
+    ReactDOM.render(jsx,document.getElementById('app'));
+});
 

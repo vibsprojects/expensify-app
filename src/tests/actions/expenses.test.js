@@ -1,13 +1,13 @@
 import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
-import { startAddExpense, addExpense, editExpense, removeExpense,setExpenses } from '../../actions/expenses';
+import { startAddExpense, addExpense, editExpense, removeExpense,setExpenses,startSetExpenses } from '../../actions/expenses';
 import expenses from '../fixtures/expenses';
 import database from '../../firebase/firebase';
 
 let originalTimeout;
 beforeEach(()=>{
   originalTimeout = jasmine.DEFAULT_TIMEOUT_INTERVAL;
-  jasmine.DEFAULT_TIMEOUT_INTERVAL = 25000;
+  jasmine.DEFAULT_TIMEOUT_INTERVAL = 35000;
 
   const expensesData = {};
   expenses.forEach(({ id,description,note,amount,createdAt })=>{
@@ -110,6 +110,18 @@ test('should set up expense action object with data', () => {
       type: 'SET_EXPENSES',
       expenses: expenses
     });
+});
+
+test('Should fetch the expenses from firebase', (done) => {
+    const store = createMockStore({});
+    store.dispatch(startSetExpenses()).then(()=>{
+      const actions = store.getActions();
+      expect(actions[0]).toEqual({
+          type:'SET_EXPENSES',
+          expenses //as we are seeding data in beforeEach so no need to do anything, we will get that data back here
+      });
+      done();
+    })
 });
 
 
