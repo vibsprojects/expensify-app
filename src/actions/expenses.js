@@ -83,4 +83,13 @@ export const startSetExpenses =()=> {
       });
   };
 }
+
+export const startRemoveExpense = ({ id }) => { 
+  return (dispatch)=> { //this function gets called internally by redux with dispatch (gives access to dispatch to use inside)
+      return database.ref(`expenses/${id}`).remove().then(()=>{
+          dispatch(removeExpense({id}));
+      });
+    };
+};
+
   
