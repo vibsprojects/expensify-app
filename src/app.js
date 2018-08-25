@@ -8,8 +8,8 @@ import { setTextFilter } from './actions/filters';
 import  getVisibleExpenses from './selectors/expenses';
 import './styles/styles.scss';
 import 'react-dates/lib/css/_datepicker.css';
-import AppRouter from './routers/AppRouter';
-import './firebase/firebase';
+import  AppRouter,{ history } from './routers/AppRouter';
+import { firebase } from './firebase/firebase';
 // import '../src/playground/promises';
 
 const store = configureStore();
@@ -39,7 +39,30 @@ const jsx=(
 
 ReactDOM.render(<p>Loading...</p>,document.getElementById('app'));
 
-store.dispatch(startSetExpenses()).then(()=>{
-    ReactDOM.render(jsx,document.getElementById('app'));
+let hasRendered=false;
+const renderApp = () =>{
+    if(!hasRendered)
+    {
+        ReactDOM.render(jsx,document.getElementById('app'));
+        hasRendered=true;
+    }
+};
+
+firebase.auth().onAuthStateChanged((user)=>{
+    if(user)
+    {
+        store.dispatch(startSetExpenses()).then(()=>{
+            renderApp();    
+            if(history.location.pathname === '/'){
+                history.push('/dashboard');
+            }
+        });       
+        console.log('log in');
+
+    } else {
+        renderApp();    
+        console.log('log out');
+        history.push('/');
+    }
 });
 
