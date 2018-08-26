@@ -27,7 +27,8 @@ export const addExpense = (expense) => ({
 });
   
   export const startAddExpense = (expenseData = {}) => { 
-    return (dispatch)=>{ //this function gets called internally by redux with dispatch (gives access to dispatch to use inside)
+    return (dispatch,getState)=> { //this function gets called internally by redux with dispatch (gives access to dispatch to use inside)
+       const uid = getState().auth.uid;
         const {
           description = '',
           note = '',
@@ -39,7 +40,7 @@ export const addExpense = (expense) => ({
         //this function runs, take all data, save data to firebase
         //and dispatch the action from up above
         //we dont need Id from uuid as firebase will generate id fo us.
-        return database.ref('expenses').push(expense).then((ref)=>{
+        return database.ref(`user/${uid}/expenses`).push(expense).then((ref)=>{
             dispatch(addExpense({
                     id: ref.key,
                     ...expense                 
@@ -67,8 +68,9 @@ export const addExpense = (expense) => ({
   });
 
   export const startEditExpense=(id,updates)=>{
-    return (dispatch)=> {
-      return database.ref(`expenses/${id}`)
+    return (dispatch, getState)=> {
+      const uid = getState().auth.uid;
+      return database.ref(`user/${uid}/expenses/${id}`)
                     .update(updates)
                     .then(()=> {
                         dispatch(editExpense(id,updates));
@@ -78,8 +80,9 @@ export const addExpense = (expense) => ({
   };
 
 export const startSetExpenses =()=> {
-  return (dispatch)=>{
-    return database.ref('expenses')
+  return (dispatch, getState)=>{
+    const uid = getState().auth.uid;
+    return database.ref(`user/${uid}/expenses`)
         .once('value')
         .then((snapshot)=>{
           const expenses=[];        
@@ -96,8 +99,9 @@ export const startSetExpenses =()=> {
 }
 
 export const startRemoveExpense = ({ id }) => { 
-  return (dispatch)=> { //this function gets called internally by redux with dispatch (gives access to dispatch to use inside)
-      return database.ref(`expenses/${id}`).remove().then(()=>{
+  return (dispatch, getState)=> { //this function gets called internally by redux with dispatch (gives access to dispatch to use inside)
+      const uid = getState().auth.uid;
+      return database.ref(`user/${uid}/expenses/${id}`).remove().then(()=>{
           dispatch(removeExpense({id}));
       });
     };
