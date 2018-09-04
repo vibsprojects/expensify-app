@@ -8,8 +8,7 @@ const addExpense = (
     note = '',
     amount = 0,
     createdAt = 0
-  } = {}
-) => ({
+  } = {}) => ({
   type: 'ADD_EXPENSE',
   expense: {
     id: uuid(),
@@ -91,27 +90,25 @@ const expensesReducer = (state = expensesReducerDefaultState, action) => {
   }
 };
 
-
-
-const getVisibleExpenses=(expenses,{ text, sortBy, startDate, endDate})=>{
-    return expenses.filter((expense)=>{
-            const startDateMatch = typeof startDate !== 'number' || expense.createdAt >=startDate;
-            const endDateMatch = typeof startDate !== 'number' || expense.createdAt <=endDate;
+const getVisibleExpenses = (expenses, { text, sortBy, startDate, endDate }) => {
+    return expenses.filter((expense) => {
+            const startDateMatch = typeof startDate !== 'number' || expense.createdAt >= startDate;
+            const endDateMatch = typeof startDate !== 'number' || expense.createdAt <= endDate;
             const textDateMatch=expense.description.toLowerCase().includes(text.toLowerCase());
 
             return startDateMatch && endDateMatch && textDateMatch;
     }).sort((a, b) => {
-        if (sortBy === 'date'){
-            return a.createdAt < b.createdAt ? 1 :-1;
+        if (sortBy === 'date') {
+            return a.createdAt < b.createdAt ? 1 : -1;
         }
-        else if (sortBy === 'amount'){
+        else if (sortBy === 'amount') {
             return a.amount > b.amount ? 1 : -1;
         }
     });
 };
 
 // Store creation
-const store = createStore(
+const store = createStore (
   combineReducers({
     expenses: expensesReducer,
     filters: filtersReducer
@@ -120,7 +117,7 @@ const store = createStore(
 
 store.subscribe(() => {
   const state = store.getState();
-  const visibleExpenses=getVisibleExpenses(state.expenses,state.filters);
+  const visibleExpenses = getVisibleExpenses(state.expenses,state.filters);
   console.log(visibleExpenses);
 });
 
@@ -130,7 +127,7 @@ const expenseTwo = store.dispatch(addExpense({ description: 'Coffee', amount: 30
 // store.dispatch(removeExpense({ id: expenseOne.expense.id }));
 // store.dispatch(editExpense(expenseTwo.expense.id, { amount: 500 }));
 
- //store.dispatch(setTextFilter('ff'));
+ // store.dispatch(setTextFilter('ff'));
 // store.dispatch(setTextFilter());
 
  store.dispatch(sortByAmount());

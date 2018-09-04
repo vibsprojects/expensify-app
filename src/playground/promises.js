@@ -1,7 +1,7 @@
-const promise =new Promise((resolve,reject)=>{
+const promise = new Promise((resolve,reject)=>{
     setTimeout(() => {
         resolve('This is my resolved data');    
-        //reject('this is error');
+        // reject('this is error');
     }, 5000);
 });
 

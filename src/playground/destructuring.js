@@ -1,4 +1,4 @@
-//object destructing
+// object destructing
 
 // const person = {
 //   name: 'Andrew',
@@ -30,15 +30,15 @@
 //   console.log(publisherName); // Penguin, Self-Published
   
 
-  //Arrary  destructing 
+  // Arrary  destructing 
 
 
-  const address=['19 buckley ave','blacktown','NSW','2148'];
-  const [street,suburb,state,zip]=address;
+  // const address = ['19 buckley ave', 'blacktown', 'NSW', '2148'];
+  // const [street, suburb, state, zip] = address;
 
-  console.log(`You are in ${suburb} ${state}`);
+  // console.log(`You are in ${suburb} ${state}`);
 
-  const item=['Coffee (hot)','2.00','2.50','2.75'];
-  const [itemName,,mediumPrice] =item;
+  // const item = ['Coffee (hot)', '2.00', '2.50', '2.75'];
+  // const [itemName, , mediumPrice] = item;
 
-  console.log(`A medium ${itemName} costs ${mediumPrice}`);
+  // console.log(`A medium ${itemName} costs ${mediumPrice}`);

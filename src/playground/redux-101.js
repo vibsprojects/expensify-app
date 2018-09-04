@@ -1,27 +1,27 @@
 import { createStore } from 'redux';
 
 
-const incrementCount=({incrementBy =1}={})=>({
-    type:'INCREMENT',
+const incrementCount = ({ incrementBy = 1 } = {}) => ({
+    type: 'INCREMENT',
     incrementBy    
 });
 
-const decrementCount=({decrementBy = 1}= {})=>({
-    type:'DECREMENT',
+const decrementCount = ({decrementBy = 1 } = {}) => ({
+    type: 'DECREMENT',
     decrementBy
 });
 
-const resetCount = () =>({
-    type:'RESET'  
+const resetCount = () => ({
+    type: 'RESET'  
 });
 
-const setCount=({setValue=19}={})=>({
-    type:'SET',
+const setCount = ({ setValue = 19 } = {}) => ({
+    type: 'SET',
     setValue
 });
 
-const countReducer=(state = { count: 0 }, action)=> {
-    switch(action.type){
+const countReducer = (state = { count: 0 }, action)=> {
+    switch (action.type) {
         case 'INCREMENT':
             return {
                 count: state.count + action.incrementBy
@@ -48,22 +48,22 @@ const store = createStore(countReducer);
 // console.log(store.getState());
 
 
-store.dispatch(incrementCount({ incrementBy : 6}));
+store.dispatch(incrementCount({ incrementBy: 6 }));
 
 store.dispatch(incrementCount());
 
 store.dispatch(decrementCount());
 
-store.dispatch(decrementCount({decrementBy : 3}));
+store.dispatch(decrementCount({ decrementBy: 3 }));
 
 store.dispatch(resetCount());
 
 store.dispatch(setCount());
 
 
-//store.dispatch(reset({resetValue:0}));
+// store.dispatch(reset({resetValue:0}));
 
-//store.dispatch(set({setvalue:5}));
+// store.dispatch(set({setvalue:5}));
 
 // store.dispatch({
 //     type:'INCREMENT'

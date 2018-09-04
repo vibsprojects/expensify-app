@@ -1,5 +1,5 @@
-import  React from 'react';
-import { Router,Route , Switch , Link, NavLink } from 'react-router-dom';
+import React from 'react';
+import { Router, Route, Switch, Link ,NavLink } from 'react-router-dom';
 import createHistory from 'history/createBrowserHistory';
 import ExpenseDashBoardPage from '../components/ExpenseDashBoardPage';
 import AddExpensePage from '../components/AddExpensePage';
@@ -17,16 +17,16 @@ const AppRouter = () => {
         <Router history={history}>
         <div>
             <Switch>
-                <PublicRoute path="/" component={LoginPage} exact={true}/>
-                <PrivateRoute path="/dashboard" component={ExpenseDashBoardPage}/>
-                <PrivateRoute path="/create" component={AddExpensePage}/>
+                <PublicRoute path="/" component={LoginPage} exact = {true}/>
+                <PrivateRoute path="/dashboard" component={ExpenseDashBoardPage} />
+                <PrivateRoute path="/create" component={AddExpensePage} />
                 <PrivateRoute path="/edit/:id" component={EditExpensePage} />                
-                <Route component={NotFoundPage}/>        
+                <Route component={NotFoundPage} />        
             </Switch>
         </div>
         </Router> 
-    )
-}
+    );
+};
 
 export default AppRouter;
 
